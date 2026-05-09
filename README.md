@@ -1,31 +1,26 @@
 # 🎬 CineMatch — Movie Recommendation System
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square&logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-App-red?style=flat-square&logo=streamlit)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-orange?style=flat-square&logo=scikit-learn)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-
 An ML-powered movie recommendation system built with content-based filtering, 
 SVD matrix factorization, and a hybrid ensemble model trained on 25M ratings.
 
 ---
 
-## 🚀 Live Demo
+🚀 Live Demo
 > Coming soon — Streamlit Cloud deployment
 
 ---
 
-## 📌 Features
-- 🎯 Content-based filtering using TF-IDF + cosine similarity
-- 🤝 Collaborative filtering using SVD matrix factorization
-- 🔀 Hybrid model with dynamic alpha weighting
-- 🎬 Real movie posters via OMDB API
-- 📊 Trained on 25M ratings from 162,000 users
-- ⚡ 86% Precision@10 · RMSE 0.78
+ 📌 Features
+-  Content-based filtering using TF-IDF + cosine similarity
+-  Collaborative filtering using SVD matrix factorization
+-  Hybrid model with dynamic alpha weighting
+-  Real movie posters via OMDB API
+-  Trained on 25M ratings from 162,000 users
+-  86% Precision@10 · RMSE 0.78
 
 ---
 
-## 🧠 ML Concepts Used
+ 🧠 ML Concepts Used
  Concept --> Where Used 
 
  TF-IDF Vectorization--> Content-based filtering 
@@ -40,21 +35,21 @@ SVD matrix factorization, and a hybrid ensemble model trained on 25M ratings.
 ---
 
 ## 📁 Project Structure
-movie-reccomender/
-├── app/
-│   └── app.py              # Streamlit web app
-├── data/
-│   ├── raw/                # Original datasets (not tracked)
-│   └── processed/          # Cleaned & merged data
-├── models/                 # Saved model artifacts
-├── notebooks/
-│   ├── 01_eda.ipynb        # Exploratory data analysis
-│   ├── 02_content_based.ipynb  # TF-IDF + cosine similarity
-│   ├── 03_collaborative.ipynb  # SVD collaborative filtering
-│   ├── 04_hybrid.ipynb     # Hybrid model
-│   └── 05_evaluation.ipynb # RMSE + Precision@K
-├── requirements.txt
-└── README.md
+movie-reccomender/                                                                                                      
+├── app/                                                                                                              
+│   └── app.py              # Streamlit web app                                                                         
+├── data/                                                                                                               
+│   ├── raw/                # Original datasets (not tracked)                                                           
+│   └── processed/          # Cleaned & merged data                                                                     
+├── models/                 # Saved model artifacts                                                                    
+├── notebooks/                                                                                                         
+│   ├── 01_eda.ipynb        # Exploratory data analysis                                                                
+│   ├── 02_content_based.ipynb  # TF-IDF + cosine similarity                                                           
+│   ├── 03_collaborative.ipynb  # SVD collaborative filtering                                                           
+│   ├── 04_hybrid.ipynb     # Hybrid model                                                                              
+│   └── 05_evaluation.ipynb # RMSE + Precision@K                                                                        
+├── requirements.txt                                                                                                    
+└── README.md                                                                                                           
 
 ---
 
