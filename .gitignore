@@ -1,0 +1,26 @@
+# large model files
+models/svd_predictions.pkl
+models/cosine_sim.pkl
+
+# raw data files
+data/raw/ratings.csv
+data/raw/movies.csv
+data/raw/links.csv
+data/raw/tmdb_5000_movies.csv
+data/raw/tmdb_5000_credits.csv
+
+# processed data
+data/processed/ratings_sample.csv
+
+# jupyter checkpoints
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+app/.ipynb_checkpoints/
+
+# untitled notebooks
+notebooks/Untitled.ipynb
+
+# python
+__pycache__/
+*.pyc
+venv/
