@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 import ast
 import requests
+import os
 
 st.set_page_config(
     page_title="CineMatch",
@@ -39,7 +40,7 @@ html, body, [data-testid="stAppViewContainer"] {
     background-clip: text;
 }
 .hero-sub {
-    font-size: 0.82rem;
+    font-size: 1.52rem;
     font-weight: 300;
     color: #55556a;
     letter-spacing: 0.3em;
@@ -52,7 +53,7 @@ html, body, [data-testid="stAppViewContainer"] {
     margin: 1.5rem 0;
 }
 .label {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: 500;
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -68,20 +69,20 @@ html, body, [data-testid="stAppViewContainer"] {
 }
 .seed-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
+    font-size: 1.5rem;
     letter-spacing: 0.05em;
     color: #fff;
     line-height: 1;
 }
 .seed-genre {
-    font-size: 0.88rem;
+    font-size: 1rem;
     color: #7c3aed;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 0.3rem 0 0.6rem;
 }
 .seed-overview {
-    font-size: 0.9rem;
+    font-size: 1.5rem;
     color: #6b6b80;
     line-height: 1.65;
 }
@@ -115,18 +116,18 @@ html, body, [data-testid="stAppViewContainer"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 .card-body { padding: 0.7rem 0.75rem 0.85rem; }
 .card-rank {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
+    font-size: 2rem;
     color: rgba(192,132,252,0.3);
     line-height: 1;
     margin-bottom: 0.3rem;
 }
 .card-title {
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: #e2e0d8;
     line-height: 1.35;
@@ -152,7 +153,7 @@ html, body, [data-testid="stAppViewContainer"] {
     border-radius: 5px;
 }
 .card-genre {
-    font-size: 0.78rem;
+    font-size: 0.9rem;
     color: #55556a;
 }
 /* streamlit widget overrides */
@@ -186,31 +187,23 @@ div[data-testid="stMetricValue"] { color: #e2e0d8 !important; font-size: 1.2rem 
 """, unsafe_allow_html=True)
 
 OMDB_KEY = "8defdb15"
-BASE = r'C:\Users\NIHALI\movie-reccomender'
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 @st.cache_resource(show_spinner=False)
 def load_models():
-    movies = pd.read_csv(f'{BASE}/data/processed/movies_final.csv')
+    movies = pd.read_csv(os.path.join(BASE, 'data/processed/movies_final.csv'))
     movies['genres'] = movies['genres'].apply(ast.literal_eval)
     movies['keywords'] = movies['keywords'].apply(ast.literal_eval)
     movies['top_cast'] = movies['top_cast'].apply(ast.literal_eval)
-    with open(f'{BASE}/models/svd_predictions.pkl', 'rb') as f:
-        predicted_ratings = pickle.load(f)
-    with open(f'{BASE}/models/user_id_to_idx.pkl', 'rb') as f:
-        user_id_to_idx = pickle.load(f)
-    with open(f'{BASE}/models/idx_to_movie_id.pkl', 'rb') as f:
-        idx_to_movie_id = pickle.load(f)
-    with open(f'{BASE}/models/movie_encoder.pkl', 'rb') as f:
-        movie_encoder = pickle.load(f)
-    with open(f'{BASE}/models/indices.pkl', 'rb') as f:
+
+    with open(os.path.join(BASE, 'models/indices.pkl'), 'rb') as f:
         indices = pickle.load(f)
-    with open(f'{BASE}/models/cosine_sim.pkl', 'rb') as f:
+    with open(os.path.join(BASE, 'models/cosine_sim.pkl'), 'rb') as f:
         cosine_sim = pickle.load(f)
-    links = pd.read_csv(f'{BASE}/data/processed/links_cleaned.csv')
-    ratings_sample = pd.read_csv(f'{BASE}/data/processed/ratings_sample.csv')
-    return (movies, predicted_ratings, user_id_to_idx,
-            idx_to_movie_id, movie_encoder, indices,
-            cosine_sim, links, ratings_sample)
+
+    links = pd.read_csv(os.path.join(BASE, 'data/processed/links_cleaned.csv'))
+
+    return movies, indices, cosine_sim, links
 
 @st.cache_data(show_spinner=False)
 def get_poster(imdb_id):
@@ -252,9 +245,7 @@ def get_imdb_id(tmdb_id, links):
 
 # ── LOAD ──────────────────────────────────────────────────────
 with st.spinner(""):
-    (movies, predicted_ratings, user_id_to_idx,
-     idx_to_movie_id, movie_encoder, indices,
-     cosine_sim, links, ratings_sample) = load_models()
+    movies, indices, cosine_sim, links = load_models()
 
 # ── HERO ──────────────────────────────────────────────────────
 st.markdown("""
