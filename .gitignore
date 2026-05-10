@@ -1,6 +1,5 @@
 # large model files
 models/svd_predictions.pkl
-models/cosine_sim.pkl
 
 # raw data files
 data/raw/ratings.csv
