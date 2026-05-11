@@ -6,7 +6,7 @@ SVD matrix factorization, and a hybrid ensemble model trained on 25M ratings.
 ---
 
 🚀 Live Demo
-> Coming soon — Streamlit Cloud deployment
+> 🌐 [Live Demo](https://siac1719-movie-recommender-appapp-dvdlmp.streamlit.app)
 
 ---
 
